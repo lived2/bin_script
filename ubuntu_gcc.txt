@@ -22,3 +22,5 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 --slave /u
 --slave /usr/bin/gcov gcov /usr/bin/gcov-9 \
 --slave /usr/bin/gcov-dump gcov-dump /usr/bin/gcov-dump-9 \
 --slave /usr/bin/gcov-tool gcov-tool /usr/bin/gcov-tool-9
+
+https://cloudbytes.dev/snippets/upgrade-python-to-latest-version-on-ubuntu-linux
