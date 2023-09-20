@@ -19,7 +19,7 @@ fi
 echo "Creating project folder..."
 #mkdir -p $project/src
 #mkdir $project
-mkdir -p $project/build
+mkdir -p $project/target
 mkdir -p $project/src
 
 #main_file=$project".cpp"
@@ -44,13 +44,13 @@ echo "Creating "$main_file"..."
 echo "int main() {" > $project/$main_file
 echo "}" >> $project/$main_file
 
-cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Release -B "./"$project"/build/release"
-cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug -B "./"$project"/build/debug"
+cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Release -B "./"$project"/target/release"
+cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug -B "./"$project"/target/debug"
 
 cd $project
-ln -s build/debug/compile_commands.json compile_commands.json
+ln -s target/debug/compile_commands.json compile_commands.json
 
-#mkdir -p ./build/debug
-echo "exec ./"$project > build/debug/run.sh
-chmod 755 build/debug/run.sh
+#mkdir -p ./target/debug
+echo "exec ./"$project > target/debug/run.sh
+chmod 755 target/debug/run.sh
 
