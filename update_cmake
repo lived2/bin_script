@@ -3,4 +3,4 @@
 cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Release -B "./"$project"/target/release"
 cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug -B "./"$project"/target/debug"
 
-ln -s target/debug/compile_commands.json compile_commands.json
+#ln -s target/debug/compile_commands.json compile_commands.json
