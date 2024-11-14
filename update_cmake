@@ -1,6 +1,24 @@
 #!/bin/zsh
 
-cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Release -B "./"$project"/target/release"
-cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug -B "./"$project"/target/debug"
+#if [ $# -eq 0 ];then
+#    echo -n "Project name: "
+#    read project
+#elif [ $# -eq 1 ];then
+#    project=$1
+#else
+#    echo "Wrong argument!"
+#fi
+
+rm -f CMakeCache.txt
+rm -rf CMakeFiles
+mv target/debug/run.sh .
+rm -rf target
+
+cmake -S "./" -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Release -B "./target/release"
+cmake -S "./" -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug -B "./target/debug"
+
+cmake ./
+
+mv run.sh target/debug/
 
 #ln -s target/debug/compile_commands.json compile_commands.json
