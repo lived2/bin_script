@@ -51,6 +51,6 @@ cd $project
 ln -s target/debug/compile_commands.json compile_commands.json
 
 #mkdir -p ./target/debug
-echo "exec ./"$project > target/debug/run.sh
+echo "exec ./"$project '$@' > target/debug/run.sh
 chmod 755 target/debug/run.sh
 
