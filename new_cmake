@@ -29,8 +29,8 @@ main_file="src/main.cpp"
 echo "Creating CMakeLists.txt..."
 echo "cmake_minimum_required(VERSION 3.16)" > $project/CMakeLists.txt
 echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++17\")" >> $project/CMakeLists.txt
-echo "set(CMAKE_CXX_FLAGS_DEBUG \"-g\")" >>  $project/CMakeLists.txt
-echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3 -s\")" >> $project/CMakeLists.txt
+echo "set(CMAKE_CXX_FLAGS_DEBUG \"-g -DDEBUG\")" >>  $project/CMakeLists.txt
+echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3\")" >> $project/CMakeLists.txt
 echo "project (" >> $project/CMakeLists.txt
 echo "    "$project >> $project/CMakeLists.txt
 echo "    VERSION 0.1" >> $project/CMakeLists.txt
