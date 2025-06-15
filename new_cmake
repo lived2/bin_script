@@ -21,6 +21,7 @@ echo "Creating project folder..."
 #mkdir $project
 mkdir -p $project/target
 mkdir -p $project/src
+mkdir -p $project/inc
 
 #main_file=$project".cpp"
 #main_file="src/main.cpp"
@@ -40,8 +41,14 @@ echo "    "$project >> $project/CMakeLists.txt
 echo "    VERSION 0.1" >> $project/CMakeLists.txt
 echo "    DESCRIPTION" $project >> $project/CMakeLists.txt
 echo "    LANGUAGES CXX)" >> $project/CMakeLists.txt
-echo "add_executable("$project >> $project/CMakeLists.txt
+echo "add_executable(" >> $project/CMakeLists.txt
+echo "    "$project >> $project/CMakeLists.txt
 echo "    "$main_file >> $project/CMakeLists.txt
+echo "    )" >> $project/CMakeLists.txt
+echo "target_include_directories(" >> $project/CMakeLists.txt
+echo "    "$project >> $project/CMakeLists.txt
+echo "    PUBLIC" >> $project/CMakeLists.txt
+echo "    \$(CMAKE_SOURCE_DIR)/inc" >> $project/CMakeLists.txt
 echo "    )" >> $project/CMakeLists.txt
 
 echo "Creating "$main_file"..."
