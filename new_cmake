@@ -26,6 +26,7 @@ mkdir -p $project/inc
 #main_file=$project".cpp"
 #main_file="src/main.cpp"
 main_file="src/main.cpp"
+main_header="inc/main.h"
 
 echo "Creating CMakeLists.txt..."
 echo "cmake_minimum_required(VERSION 3.16)" > $project/CMakeLists.txt
@@ -47,13 +48,18 @@ echo "    "$main_file >> $project/CMakeLists.txt
 echo "    )" >> $project/CMakeLists.txt
 echo "target_include_directories(" >> $project/CMakeLists.txt
 echo "    "$project >> $project/CMakeLists.txt
-echo "    PUBLIC" >> $project/CMakeLists.txt
-echo "    \$(CMAKE_SOURCE_DIR)/inc" >> $project/CMakeLists.txt
+echo "    PRIVATE" >> $project/CMakeLists.txt
+echo "    inc" >> $project/CMakeLists.txt
 echo "    )" >> $project/CMakeLists.txt
 
 echo "Creating "$main_file"..."
-echo "int main() {" > $project/$main_file
+echo "#include <main.h>" > $project/$main_file
+echo "" >> $project/$main_file
+echo "int main() {" >> $project/$main_file
 echo "}" >> $project/$main_file
+
+echo "Creating "$main_header"..."
+touch $project/$main_header
 
 cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Release -B "./"$project"/target/release"
 cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug -B "./"$project"/target/debug"
