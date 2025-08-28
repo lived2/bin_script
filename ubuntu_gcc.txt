@@ -24,3 +24,11 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 --slave /u
 --slave /usr/bin/gcov-tool gcov-tool /usr/bin/gcov-tool-9
 
 https://cloudbytes.dev/snippets/upgrade-python-to-latest-version-on-ubuntu-linux
+
+sudo update-alternatives \
+  --install /usr/bin/as as /home/linuxbrew/.linuxbrew/opt/binutils/bin/as 100 \
+  --slave /usr/bin/ld ld /home/linuxbrew/.linuxbrew/opt/binutils/bin/ld \
+  --slave /usr/bin/nm nm /home/linuxbrew/.linuxbrew/opt/binutils/bin/nm \
+  --slave /usr/bin/objdump objdump /home/linuxbrew/.linuxbrew/opt/binutils/bin/objdump \
+  --slave /usr/bin/objcopy objcopy /home/linuxbrew/.linuxbrew/opt/binutils/bin/objcopy \
+  --slave /usr/bin/strip strip /home/linuxbrew/.linuxbrew/opt/binutils/bin/strip
