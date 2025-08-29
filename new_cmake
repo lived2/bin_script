@@ -30,7 +30,8 @@ main_header="inc/main.h"
 
 echo "Creating CMakeLists.txt..."
 echo "cmake_minimum_required(VERSION 3.16)" > $project/CMakeLists.txt
-echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++17\")" >> $project/CMakeLists.txt
+#echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++17\")" >> $project/CMakeLists.txt
+echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
 echo "set(CMAKE_CXX_FLAGS_DEBUG \"-g -DDEBUG\")" >>  $project/CMakeLists.txt
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3 -s\")" >> $project/CMakeLists.txt
