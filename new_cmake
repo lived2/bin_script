@@ -32,9 +32,9 @@ echo "Creating CMakeLists.txt..."
 echo "cmake_minimum_required(VERSION 3.16)" > $project/CMakeLists.txt
 #echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++17\")" >> $project/CMakeLists.txt
 # for clang
-#echo "set(CMAKE_C_COMPILER \"clang\")" >> $project/CMakeLists.txt
-#echo "set(CMAKE_CXX_COMPILER \"clang++\")" >> $project/CMakeLists.txt
-#echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
+echo "#set(CMAKE_C_COMPILER \"clang\")" >> $project/CMakeLists.txt
+echo "#set(CMAKE_CXX_COMPILER \"clang++\")" >> $project/CMakeLists.txt
+echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
 # end for clang
 echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
 echo "set(CMAKE_CXX_FLAGS_DEBUG \"-g -DDEBUG\")" >>  $project/CMakeLists.txt
