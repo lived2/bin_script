@@ -9,6 +9,11 @@
 #    echo "Wrong argument!"
 #fi
 
+if ! [ -f CMakeLists.txt ]; then
+  echo "No CMakeLists.txt exist"
+  exit 1
+fi
+
 rm -f CMakeCache.txt
 rm -rf CMakeFiles
 mv target/debug/run.sh .

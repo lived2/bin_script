@@ -3,10 +3,30 @@
 if [ $# -eq 0 ];then
     echo -n "Project name: "
     read project
+    echo -n "Compiler: "
+    read compiler
 elif [ $# -eq 1 ];then
     project=$1
+elif [ $# -eq 1 ] || [ $# -eq 2 ];then
+    project=$1
+    compiler=$2
 else
     echo "Wrong argument!"
+    echo "Usage: $0 <project_name> [compiler]"
+fi
+
+if [ -z "$project" ]; then
+  echo "Null project name"
+  exit 1
+fi
+if [ -z "$compiler" ]; then
+  compiler="gcc"
+fi
+
+if [ "$compiler" = "g++" ]; then
+  compiler="gcc"
+elif [ "$compiler" = "clang++" ]; then
+  compiler="clang"
 fi
 
 #echo $project
@@ -31,12 +51,17 @@ main_header="inc/main.h"
 echo "Creating CMakeLists.txt..."
 echo "cmake_minimum_required(VERSION 3.16)" > $project/CMakeLists.txt
 #echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++17\")" >> $project/CMakeLists.txt
-# for clang
-echo "#set(CMAKE_C_COMPILER \"clang\")" >> $project/CMakeLists.txt
-echo "#set(CMAKE_CXX_COMPILER \"clang++\")" >> $project/CMakeLists.txt
-echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
-# end for clang
-echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
+if [ "$compiler" = "gcc" ]; then
+  echo "#set(CMAKE_C_COMPILER \"clang\")" >> $project/CMakeLists.txt
+  echo "#set(CMAKE_CXX_COMPILER \"clang++\")" >> $project/CMakeLists.txt
+  echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
+  echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
+elif [ "$compiler" = "clang" ]; then
+  echo "set(CMAKE_C_COMPILER \"clang\")" >> $project/CMakeLists.txt
+  echo "set(CMAKE_CXX_COMPILER \"clang++\")" >> $project/CMakeLists.txt
+  echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
+  echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
+fi
 echo "set(CMAKE_CXX_FLAGS_DEBUG \"-g -DDEBUG\")" >>  $project/CMakeLists.txt
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3 -s\")" >> $project/CMakeLists.txt
