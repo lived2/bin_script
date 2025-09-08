@@ -21,9 +21,7 @@ if [ -z "$project" ]; then
 fi
 if [ -z "$compiler" ]; then
   compiler="gcc"
-fi
-
-if [ "$compiler" = "g++" ]; then
+elif [ "$compiler" = "g++" ]; then
   compiler="gcc"
 elif [ "$compiler" = "clang++" ]; then
   compiler="clang"
