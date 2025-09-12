@@ -52,13 +52,23 @@ echo "cmake_minimum_required(VERSION 3.16)" > $project/CMakeLists.txt
 if [ "$compiler" = "gcc" ]; then
   echo "#set(CMAKE_C_COMPILER \"clang\")" >> $project/CMakeLists.txt
   echo "#set(CMAKE_CXX_COMPILER \"clang++\")" >> $project/CMakeLists.txt
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
   echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
+else
+  echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
+  echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
+fi
 elif [ "$compiler" = "clang" ]; then
   echo "set(CMAKE_C_COMPILER \"clang\")" >> $project/CMakeLists.txt
   echo "set(CMAKE_CXX_COMPILER \"clang++\")" >> $project/CMakeLists.txt
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
   echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
+else
+  echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
+  echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
+fi
 fi
 echo "set(CMAKE_CXX_FLAGS_DEBUG \"-g -DDEBUG\")" >>  $project/CMakeLists.txt
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
