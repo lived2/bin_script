@@ -72,7 +72,13 @@ elif [ "$compiler" = "clang" ]; then
 fi
 echo "set(CMAKE_CXX_FLAGS_DEBUG \"-g -DDEBUG\")" >>  $project/CMakeLists.txt
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3 -s\")" >> $project/CMakeLists.txt
+  if [ "$compiler" = "gcc" ]; then
+    echo "#set(CMAKE_CXX_FLAGS_RELEASE \"-O3\")" >> $project/CMakeLists.txt
+    echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3 -s\")" >> $project/CMakeLists.txt
+  elif [ "$compiler" = "clang" ]; then
+    echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3\")" >> $project/CMakeLists.txt
+    echo "#set(CMAKE_CXX_FLAGS_RELEASE \"-O3 -s\")" >> $project/CMakeLists.txt
+  fi
 else
   echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3\")" >> $project/CMakeLists.txt
 fi
