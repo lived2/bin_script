@@ -20,7 +20,7 @@ if [ -z "$project" ]; then
   exit 1
 fi
 if [ -z "$compiler" ]; then
-  compiler="gcc"
+  compiler="clang"
 elif [ "$compiler" = "g++" ]; then
   compiler="gcc"
 elif [ "$compiler" = "clang++" ]; then
