@@ -19,8 +19,10 @@ rm -rf CMakeFiles
 mv target/debug/run.sh .
 rm -rf target
 
-cmake -S "./" -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Release -B "./target/release"
-cmake -S "./" -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug -B "./target/debug"
+#cmake -S "./" -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Release -B "./target/release"
+#cmake -S "./" -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug -B "./target/debug"
+cmake -S "./" -DCMAKE_BUILD_TYPE=Release -B "./target/release"
+cmake -S "./" -DCMAKE_BUILD_TYPE=Debug -B "./target/debug"
 
 #cmake ./
 

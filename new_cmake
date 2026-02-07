@@ -48,40 +48,29 @@ main_header="inc/main.h"
 
 echo "Creating CMakeLists.txt..."
 echo "cmake_minimum_required(VERSION 3.16)" > $project/CMakeLists.txt
-#echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++17\")" >> $project/CMakeLists.txt
 if [ "$compiler" = "gcc" ]; then
   echo "#set(CMAKE_C_COMPILER \"clang\")" >> $project/CMakeLists.txt
   echo "#set(CMAKE_CXX_COMPILER \"clang++\")" >> $project/CMakeLists.txt
-  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
-    echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
-  else
-    echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
-    echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
-  fi
+  echo "set(CMAKE_C_COMPILER \"gcc\")" >> $project/CMakeLists.txt
+  echo "set(CMAKE_CXX_COMPILER \"g++\")" >> $project/CMakeLists.txt
 elif [ "$compiler" = "clang" ]; then
   echo "set(CMAKE_C_COMPILER \"clang\")" >> $project/CMakeLists.txt
   echo "set(CMAKE_CXX_COMPILER \"clang++\")" >> $project/CMakeLists.txt
-  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
-    echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
-  else
-    echo "#set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23 -stdlib=libc++\")" >> $project/CMakeLists.txt
-    echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
-  fi
+  echo "#set(CMAKE_C_COMPILER \"gcc\")" >> $project/CMakeLists.txt
+  echo "#set(CMAKE_CXX_COMPILER \"g++\")" >> $project/CMakeLists.txt
 fi
+echo "set(CMAKE_CXX_FLAGS \"-Wall -Wextra -W -std=c++23\")" >> $project/CMakeLists.txt
 echo "set(CMAKE_CXX_FLAGS_DEBUG \"-g -DDEBUG\")" >>  $project/CMakeLists.txt
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  if [ "$compiler" = "gcc" ]; then
-    echo "#set(CMAKE_CXX_FLAGS_RELEASE \"-O3\")" >> $project/CMakeLists.txt
-    echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3 -s\")" >> $project/CMakeLists.txt
-  elif [ "$compiler" = "clang" ]; then
-    echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3\")" >> $project/CMakeLists.txt
-    echo "#set(CMAKE_CXX_FLAGS_RELEASE \"-O3 -s\")" >> $project/CMakeLists.txt
-  fi
+  echo "if (\${CMAKE_C_COMPILER} MATCHES gcc)" >> $project/CMakeLists.txt
+  echo "  set(CMAKE_CXX_FLAGS_RELEASE \"-O3 -s\")" >> $project/CMakeLists.txt
+  echo "else ()" >> $project/CMakeLists.txt
+  echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3\")" >> $project/CMakeLists.txt
+  echo "endif ()" >> $project/CMakeLists.txt
 else
   echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3\")" >> $project/CMakeLists.txt
 fi
+echo "set(CMAKE_EXPORT_COMPILE_COMMANDS ON)" >> $project/CMakeLists.txt
 echo "project (" >> $project/CMakeLists.txt
 echo "    "$project >> $project/CMakeLists.txt
 echo "    VERSION 0.1" >> $project/CMakeLists.txt
@@ -106,8 +95,10 @@ echo "}" >> $project/$main_file
 echo "Creating "$main_header"..."
 touch $project/$main_header
 
-cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Release -B "./"$project"/target/release"
-cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug -B "./"$project"/target/debug"
+#cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Release -B "./"$project"/target/release"
+#cmake -S "./"$project -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug -B "./"$project"/target/debug"
+cmake -S "./"$project -DCMAKE_BUILD_TYPE=Release -B "./"$project"/target/release"
+cmake -S "./"$project -DCMAKE_BUILD_TYPE=Debug -B "./"$project"/target/debug"
 
 cd $project
 ln -s target/debug/compile_commands.json compile_commands.json
