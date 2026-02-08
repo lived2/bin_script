@@ -65,7 +65,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   echo "if (\${CMAKE_C_COMPILER} MATCHES gcc)" >> $project/CMakeLists.txt
   echo "  set(CMAKE_CXX_FLAGS_RELEASE \"-O3 -s\")" >> $project/CMakeLists.txt
   echo "else ()" >> $project/CMakeLists.txt
-  echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3\")" >> $project/CMakeLists.txt
+  echo "  set(CMAKE_CXX_FLAGS_RELEASE \"-O3\")" >> $project/CMakeLists.txt
   echo "endif ()" >> $project/CMakeLists.txt
 else
   echo "set(CMAKE_CXX_FLAGS_RELEASE \"-O3\")" >> $project/CMakeLists.txt
